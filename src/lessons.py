@@ -2,8 +2,6 @@ import pytz
 import datetime
 
 
-LESSONS_PATH = 'data/time_table.json'
-
 def _get_time_from_string(time: str) -> datetime.time:
     return datetime.datetime.strptime(time, '%H:%M').time()
 
