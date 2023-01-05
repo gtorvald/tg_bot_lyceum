@@ -1,13 +1,13 @@
 import pytz
 import datetime
-import json
+
 
 LESSONS_PATH = 'data/time_table.json'
 
 def _get_time_from_string(time: str) -> datetime.time:
     return datetime.datetime.strptime(time, '%H:%M').time()
 
-def get_current_lesson() -> str:
+def get_current_lesson(data: dict) -> str:
     tz_ekb = pytz.timezone('Asia/Yekaterinburg')
     now_time = datetime.datetime.now(tz_ekb).time()
     now_weekday = datetime.datetime.now(tz_ekb).weekday()
@@ -15,8 +15,6 @@ def get_current_lesson() -> str:
     if now_weekday == 0:
         now_time += datetime.timedelta(minutes=10)
         
-    with open(LESSONS_PATH) as file:
-        data = json.load(file)
     lessons = data['lessons']
     times = data['times']
 
