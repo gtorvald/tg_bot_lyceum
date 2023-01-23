@@ -7,11 +7,12 @@ def _get_time_from_string(time: str) -> datetime.time:
 
 def get_current_lesson(data: dict) -> str:
     tz_ekb = pytz.timezone('Asia/Yekaterinburg')
-    now_time = datetime.datetime.now(tz_ekb).time()
+    now = datetime.datetime.now(tz_ekb)
     now_weekday = datetime.datetime.now(tz_ekb).weekday()
     # сдвиг уроков в понедельник
     if now_weekday == 0:
-        now_time += datetime.timedelta(minutes=10)
+        now += datetime.timedelta(minutes=10)
+    now_time = now.time()
         
     lessons = data['lessons']
     times = data['times']
